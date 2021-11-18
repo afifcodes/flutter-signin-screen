@@ -1,115 +1,175 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() =>
+    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+class _MyAppState extends State<MyApp> {
+  bool isObscure = true;
+  PreferredSizeWidget appBar() {
+    return AppBar(
+      backgroundColor: Color(0xff090910),
+      elevation: 0,
+      leading: Container(
+        margin: EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.arrow_back),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+              'Back',
+              style: GoogleFonts.inter(fontWeight: FontWeight.w700),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      leadingWidth: 200,
     );
+  }
+
+  Widget username({String? placeholder, String? name}) {
+    return Container(
+        height: 48,
+        decoration: BoxDecoration(
+            color: Color(0xff222328), borderRadius: BorderRadius.circular(8)),
+        padding: EdgeInsets.all(12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 72,
+              child: Text(name!,
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w500, color: Color(0xff5C5D62))),
+            ),
+            VerticalDivider(thickness: 1, color: Color(0xff5C5D62)),
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+                child: TextField(
+                    style: GoogleFonts.inter(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(4),
+                      isCollapsed: true,
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.inter(color: Color(0xff5C5D62)),
+                      hintText: placeholder!,
+                    )))
+          ],
+        ));
+  }
+
+  Widget password({String? placeholder, String? name}) {
+    return Container(
+        height: 48,
+        decoration: BoxDecoration(
+            color: Color(0xff222328), borderRadius: BorderRadius.circular(8)),
+        padding: EdgeInsets.all(12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 72,
+              child: Text(name!,
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w500, color: Color(0xff5C5D62))),
+            ),
+            VerticalDivider(thickness: 1, color: Color(0xff5C5D62)),
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+                child: TextField(
+                    obscureText: isObscure,
+                    style: GoogleFonts.inter(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(4),
+                        isCollapsed: true,
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintStyle: GoogleFonts.inter(color: Color(0xff5C5D62)),
+                        hintText: placeholder!,
+                        suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isObscure = !isObscure;
+                              });
+                            },
+                            child: isObscure
+                                ? Icon(Icons.visibility_off,
+                                    color: Color(0xff2C2891))
+                                : Icon(Icons.visibility,
+                                    color: Color(0xff5C5D62))))))
+          ],
+        ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Color(0xff090910),
+        appBar: appBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Sign In',
+                        style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: 36,
+                            fontWeight: FontWeight.w700)),
+                    SizedBox(height: 24),
+                    username(name: 'Email', placeholder: 'example@email.com'),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    password(name: 'Password', placeholder: 'password'),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text('Forgot password?',
+                          style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff5C5D62))),
+                    ),
+                    SizedBox(height: 24),
+                    Container(
+                        height: 48,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Color(0xff2C2891)),
+                        child: Center(
+                            child: Text('Continue',
+                                style: GoogleFonts.inter(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500)))),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
