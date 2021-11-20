@@ -1,4 +1,4 @@
-## Flutter Day 3 of 100 - Sign In Screen
+## Flutter UI Day 3 of 100 - Sign In Screen
 <p align="center">
   <img src="https://avatars.githubusercontent.com/u/94339143?v=4" width=100/>
 </p>
